@@ -11,3 +11,15 @@ services:
     container_name: frontend
     ports:
       - 8080:80
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    depends_on:
+      - api
+      - frontend
+    links:
+      - api
+      - frontend
+    ports:
+      - 80:80
