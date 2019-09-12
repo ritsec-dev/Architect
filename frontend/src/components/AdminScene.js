@@ -49,7 +49,6 @@ const useStyles = makeStyles(theme => ({
 export default function ClippedDrawer() {
   const classes = useStyles();
   const RosterLink = React.forwardRef((props, ref) => <Link to="/app/roster" innerRef={ref} {...props} />);
-  let currentPage = "Competition";
 
   return (
     <div className={classes.root}>
@@ -76,7 +75,7 @@ export default function ClippedDrawer() {
                   <ListItemText primary="Competition" />
                 </ListItem>
                 <Divider />
-                <ListItem button key="Roster" className={(currentPage == "Roster") ? classes.currentNavButton : ""} component={RosterLink}>
+                <ListItem button key="Roster" className={(window.location.pathname === "/app/roster") ? classes.currentNavButton : ""} component={RosterLink}>
                     <ListItemIcon><PeopleIcon /></ListItemIcon>
                     <ListItemText primary="Roster" />
                 </ListItem>
