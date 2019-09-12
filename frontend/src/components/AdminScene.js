@@ -15,6 +15,7 @@ import MedalIcon from '@material-ui/icons/EmojiEvents'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -32,6 +33,9 @@ const useStyles = makeStyles(theme => ({
   drawerPaper: {
     width: drawerWidth,
   },
+  currentNavButton: {
+    color: "#3f51b5",
+  },
   modularPaper: {
     padding: theme.spacing(3, 2),
   },
@@ -44,54 +48,72 @@ const useStyles = makeStyles(theme => ({
 
 export default function ClippedDrawer() {
   const classes = useStyles();
+  const RosterLink = React.forwardRef((props, ref) => <Link to="/app/roster" innerRef={ref} {...props} />);
+  let currentPage = "Competition";
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" noWrap>
-            Architect
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.toolbar} />
-        <List>
-            <ListItem button key="Competition">
-              <ListItemIcon><MedalIcon /></ListItemIcon>
-              <ListItemText primary="Competition" />
-            </ListItem>
-            <Divider />
-            <ListItem button key="Roster">
-              <ListItemIcon><PeopleIcon /></ListItemIcon>
-              <ListItemText primary="Roster" />
-            </ListItem>
-            <Divider />
-            <ListItem button key="Machines">
-              <ListItemIcon><ComputerIcon /></ListItemIcon>
-              <ListItemText primary="Machines" />
-            </ListItem>
-            <Divider />
-        </List>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Paper className={classes.modularPaper}>
-          <Typography variant="h5" component="h3">
-            This is a sheet of paper.
-          </Typography>
-          <Typography component="p">
-            We should put active components here, i.e. modular components like settings pages and machine listings.
-          </Typography>
-        </Paper>
-      </main>
+      <Router>
+        <CssBaseline />
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <Typography variant="h6" noWrap>
+              Architect
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          className={classes.drawer}
+          variant="permanent"
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <div className={classes.toolbar} />
+            <List>
+                <ListItem button key="Competition" disabled="true">
+                  <ListItemIcon><MedalIcon /></ListItemIcon>
+                  <ListItemText primary="Competition" />
+                </ListItem>
+                <Divider />
+                <ListItem button key="Roster" className={(currentPage == "Roster") ? classes.currentNavButton : ""} component={RosterLink}>
+                    <ListItemIcon><PeopleIcon /></ListItemIcon>
+                    <ListItemText primary="Roster" />
+                </ListItem>
+                <Divider />
+                <ListItem button key="Machines" disabled="true">
+                  <ListItemIcon><ComputerIcon /></ListItemIcon>
+                  <ListItemText primary="Machines" />
+                </ListItem>
+                <Divider />
+            </List>
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <Paper className={classes.modularPaper}>
+            <Route exact={true} path="/" render={() => (
+              <div>
+                <Typography variant="h5" component="h3">
+                  This is a sheet of paper.
+                </Typography>
+                <Typography component="p">
+                  We should put active components here, i.e. modular components like settings pages and machine listings.
+                </Typography>
+              </div>
+            )}/>
+            <Route exact={true} path="/app/roster" render={() => (
+              <div>
+                <Typography variant="h5" component="h3">
+                  TEST ROSTER
+                </Typography>
+                <Typography component="p">
+                  This should have roster text
+                </Typography>
+              </div>
+            )}/>
+          </Paper>
+        </main>
+      </Router>
     </div>
   );
 }
