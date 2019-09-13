@@ -17,6 +17,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
+import RosterModule from '../components/RosterModule'
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -38,6 +40,7 @@ const useStyles = makeStyles(theme => ({
   },
   modularPaper: {
     padding: theme.spacing(3, 2),
+    backgroundColor: "#f5f5f5",
   },
   content: {
     flexGrow: 1,
@@ -102,12 +105,7 @@ export default function ClippedDrawer() {
             )}/>
             <Route exact={true} path="/app/roster" render={() => (
               <div>
-                <Typography variant="h5" component="h3">
-                  TEST ROSTER
-                </Typography>
-                <Typography component="p">
-                  This should have roster text
-                </Typography>
+                <RosterModule />
               </div>
             )}/>
           </Paper>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import AdminScene from './components/AdminScene'
+import AdminScene from './scenes/AdminScene'
 
 function App() {
   return (
