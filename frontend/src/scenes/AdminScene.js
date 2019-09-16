@@ -14,8 +14,8 @@ import MedalIcon from '@material-ui/icons/EmojiEvents'
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import Paper from '@material-ui/core/Paper';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import RosterModule from '../components/RosterModule'
 
@@ -73,7 +73,7 @@ export default function ClippedDrawer() {
         >
           <div className={classes.toolbar} />
             <List>
-                <ListItem button key="Competition" disabled="true">
+                <ListItem button key="Competition" disabled={true}>
                   <ListItemIcon><MedalIcon /></ListItemIcon>
                   <ListItemText primary="Competition" />
                 </ListItem>
@@ -83,7 +83,7 @@ export default function ClippedDrawer() {
                     <ListItemText primary="Roster" />
                 </ListItem>
                 <Divider />
-                <ListItem button key="Machines" disabled="true">
+                <ListItem button key="Machines" disabled={true}>
                   <ListItemIcon><ComputerIcon /></ListItemIcon>
                   <ListItemText primary="Machines" />
                 </ListItem>
