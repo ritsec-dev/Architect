@@ -28,17 +28,17 @@ class UserExpandable extends React.Component {
     return (
       <ExpansionPanel className={classes.userExpandable}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-         aria-controls="panel1a-content"
-         id="panel1a-header">
-        <Typography className={classes.heading}>
-          {this.props.name}
-        </Typography>
-        <Typography className={classes.secondaryHeading}>
-          {this.props.team}
-        </Typography>
-        <Typography className={classes.secondaryHeading}>
-          {this.props.email}
-        </Typography>
+          aria-controls="panel1a-content"
+          id="panel1a-header">
+          <Typography className={classes.heading}>
+            {this.props.name}
+          </Typography>
+          <Typography className={classes.secondaryHeading}>
+            {this.props.team}
+          </Typography>
+          <Typography className={classes.secondaryHeading}>
+            {this.props.email}
+          </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>{this.props.email}</Typography>

@@ -2,6 +2,7 @@ import React from 'react';
 import UserExpandable from './UserExpandable';
 import RosterDivider from './RosterDivider';
 import { withStyles } from '@material-ui/styles';
+import API from '../API';
 
 const styles = theme => ({
   nothing: {
@@ -10,32 +11,22 @@ const styles = theme => ({
 })
 
 class RosterModule extends React.Component {
+  constructor() {
+    super();
+
+    this.state = { members: [] }
+  }
+
+  componentDidMount() {
+    API.get(`/members`)
+      .then(res => {
+        const members = res.data;
+        this.setState({ members });
+      })
+  };
 
   render() {
-    const userData = {
-      users: [
-        {
-          name: "Chris Vantine",
-          team: "Black Team",
-          email: "cav9225@rit.edu",
-        },
-        {
-          name: "Sean Newman",
-          team: "White Team",
-          email: "something@rit.edu",
-        },
-        {
-          name: "Jack McKenna",
-          team: "Black Team",
-          email: "someoneelse@rit.edu",
-        }
-      ]
-    };
-
-    const users = userData.users;
-    const teams = [...new Set(users.map(u => u.team))];
-
-    const { classes } = this.props;
+    const teams = [...new Set(this.state.members.map(u => u.team))];
 
     return (
       <React.Fragment>
@@ -43,9 +34,9 @@ class RosterModule extends React.Component {
         {teams.map((team, index) => (
           <React.Fragment>
             <RosterDivider team={team} />
-            {users.map(user => {
-              return user.team === team ?
-                <UserExpandable name={user.name} email={user.email} team={user.team} />
+            {this.state.members.map(member => {
+              return member.team === team ?
+                <UserExpandable name={member.name} email={member.email} team={member.team} />
               :
                 ""
             })}
