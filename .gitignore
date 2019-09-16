@@ -4,3 +4,6 @@ __pycache__/
 jsconfig.json
 *.pyc
 *.pyc
+*.pyc
+api/rest/__pycache__/C
+__pycache__/
