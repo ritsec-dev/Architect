@@ -7,4 +7,4 @@ class Members(Resource):
                 {'name': 'sean', 'email': 'sean@rit.edu', 'team': 'Red Team', 'role': 'Hacker'},
                 {'name': 'jack', 'email': 'jack@rit.edu', 'team': 'White Team', 'role': 'Helper'},
                 {'name': 'quinten', 'email': 'quinten@rit.edu', 'team': 'Black Team', 'role': 'Competition Architect'},
-                {'name': 'josh', 'email': 'josh@rit.edu', 'team': 'Blue Team 1', 'role': 'Team Lead'}]
+                {'name': 'josh', 'email': 'josh@rit.edu', 'team': 'Blue Team Fuck', 'role': 'Team Lead'}]
