@@ -1,14 +1,7 @@
-from flask import Flask
-from flask_restful import Api
+from api import app, api_path
+from rest.user_routes import user
 
-from rest import hello_world
-
-
-app = Flask(__name__)
-api = Api(app)
-api_path = "/api/v1"
-
-api.add_resource(hello_world.HelloWorld, "{}/hello".format(api_path))
+app.register_blueprint(user, url_prefix=api_path)
 
 
 if __name__ == "__main__":
