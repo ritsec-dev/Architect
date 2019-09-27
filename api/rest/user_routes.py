@@ -31,7 +31,7 @@ def add_user():
 def get_users():
     all_users = User.query.all()
     result = users_schema.dump(all_users)
-    return jsonify(result.data)
+    return jsonify(result)
 
 
 @user.route('/user/delete', methods=['DELETE'])
