@@ -1,29 +1,68 @@
-from flask import request, jsonify, Blueprint
-from rest.models import User, user_schema, users_schema, db
+from flask import request, jsonify, Blueprint, Response
+from rest.models import User, user_schema, users_schema, db, Team
 
 user = Blueprint('user', __name__)
 
 
-@user.route("/user_add", methods=["POST"])
+@user.route("/user/add", methods=["POST"])
 def add_user():
-    name = request.json['name']
-    role = request.json['role']
-    email = request.json['email']
-    phone = request.json['phone']
-    team = request.json['team']
+    name = request.json.get('name', '')
+    role = request.json.get('role', '')
+    email = request.json.get('email', '')
+    phone = request.json.get('phone', '')
+    team_name = request.json.get('team', '')
+    team = Team.query.filter_by(name=team_name).first()
+    if name and role and email and phone and team_name:
+        if team:
 
-    new_user = User(name, role, email, phone, team)
+            new_user = User(name, role, email, phone, team)
 
-    db.session.add(new_user)
-    db.session.commit()
+            db.session.add(new_user)
+            db.session.commit()
 
-    return jsonify(new_user)
+            return jsonify(user_schema.dump(new_user))
+
+        return Response("Team does not exist", 500)
+
+    return Response("Invalid JSON", 500)
 
 
-@user.route('/all_users', methods=['GET'])
+@user.route('/user/all', methods=['GET'])
 def get_users():
     all_users = User.query.all()
-    all_users.append(0)
     result = users_schema.dump(all_users)
     return jsonify(result.data)
 
+
+@user.route('/user/delete', methods=['DELETE'])
+def delete_user():
+    uuid = request.json.get('uuid', '')
+    if uuid:
+        user = User.query.filter_by(uuid=uuid).first()
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            return Response("Deleted user {}".format(uuid))
+        return Response("User does not exist", 500)
+    return Response("Invalid JSON", 500)
+
+
+@user.route('/user/modify', methods=['UPDATE'])
+def modify_user():
+    email = request.json.get('email', '')
+    name = request.json.get('name', '')
+    phone = request.json.get('phone', '')
+    role = request.json.get('role', '')
+    uuid = request.json.get('uuid', '')
+    if uuid:
+        user = User.query.filter_by(uuid=uuid).first()
+        if user:
+            user.email = email if email else user.email
+            user.name = name if name else user.name
+            user.phone = phone if phone else user.phone
+            user.role = role if role else user.role
+            return Response("User updated", 200)
+
+        return Response("User does not exist", 500)
+
+    return Response("UUID required", 500)
