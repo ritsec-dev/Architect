@@ -1,6 +1,7 @@
 import React from 'react';
 import UserExpandable from './UserExpandable';
 import RosterDivider from './RosterDivider';
+import CreateMember from './CreateMember';
 import { withStyles } from '@material-ui/styles';
 
 import API from '../API';
@@ -31,7 +32,7 @@ class RosterModule extends React.Component {
 
     return (
       <React.Fragment>
-
+        <CreateMember/>
         {teams.map((team, index) => (
           <React.Fragment key={team + '1'}>
             <RosterDivider team={team} key={team} />
