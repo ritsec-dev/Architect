@@ -17,7 +17,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import RosterModule from '../components/RosterModule'
+import RosterModule from '../components/RosterModule';
+import DeleteUser from '../components/DeleteUser';
 
 const drawerWidth = 240;
 
@@ -62,6 +63,7 @@ export default function ClippedDrawer() {
             <Typography variant="h6" noWrap>
               Architect
             </Typography>
+            <DeleteUser />
           </Toolbar>
         </AppBar>
         <Drawer
@@ -105,7 +107,7 @@ export default function ClippedDrawer() {
             )}/>
             <Route exact={true} path="/app/roster" render={() => (
               <div>
-                <RosterModule />
+                <DeleteUser />
               </div>
             )}/>
           </Paper>
