@@ -1,10 +1,12 @@
 from flask import request, jsonify, Blueprint, Response
 from rest.models import User, user_schema, users_schema, db, Team
+from flask_cors import cross_origin
 
 user = Blueprint('user', __name__)
 
 
 @user.route("/user/add", methods=["POST"])
+@cross_origin()
 def add_user():
     name = request.json.get('name', '')
     role = request.json.get('role', '')
@@ -28,6 +30,7 @@ def add_user():
 
 
 @user.route('/user/all', methods=['GET'])
+@cross_origin()
 def get_users():
     all_users = User.query.all()
     result = users_schema.dump(all_users)
@@ -35,6 +38,7 @@ def get_users():
 
 
 @user.route('/user/delete', methods=['DELETE'])
+@cross_origin()
 def delete_user():
     uuid = request.json.get('uuid', '')
     if uuid:
@@ -48,6 +52,7 @@ def delete_user():
 
 
 @user.route('/user/modify', methods=['UPDATE'])
+@cross_origin()
 def modify_user():
     email = request.json.get('email', '')
     name = request.json.get('name', '')
