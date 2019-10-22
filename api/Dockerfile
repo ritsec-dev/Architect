@@ -4,9 +4,9 @@ COPY ./requirements.txt /requirements.txt
 
 RUN pip install -r /requirements.txt
 
-COPY . /app
+COPY . /api
 
-WORKDIR /app
+WORKDIR /
 
-CMD ["gunicorn", "-b", "0.0.0.0:80", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:80", "api.app:app"]
 EXPOSE 80
