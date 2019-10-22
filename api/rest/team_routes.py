@@ -2,11 +2,13 @@ from flask import request, jsonify, Blueprint, Response
 from api import db
 from rest.models import Team
 from rest.models import users_schema
+from flask_cors import cross_origin
 
 team = Blueprint('team', __name__)
 
 
 @team.route('/team/add', methods=['POST'])
+@cross_origin()
 def add_team():
     name = request.json.get('name', '')
     if name:
@@ -18,6 +20,7 @@ def add_team():
 
 
 @team.route('/team/members', methods=['GET'])
+@cross_origin()
 def get_members():
     name = request.json.get('name', '')
     if name:

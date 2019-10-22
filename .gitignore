@@ -7,3 +7,5 @@ jsconfig.json
 *.pyc
 api/rest/__pycache__/C
 __pycache__/
+.idea/
+.swp
