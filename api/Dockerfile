@@ -1,10 +1,12 @@
 FROM python:3.7-alpine
 
-COPY . /app
+COPY ./requirements.txt /requirements.txt
 
-WORKDIR /app
+RUN pip install -r /requirements.txt
 
-RUN pip install -r requirements.txt
+COPY . /api
 
-CMD ["gunicorn", "-b", "0.0.0.0:80", "app:app"]
+WORKDIR /
+
+CMD ["gunicorn", "-b", "0.0.0.0:80", "api.app:app"]
 EXPOSE 80
