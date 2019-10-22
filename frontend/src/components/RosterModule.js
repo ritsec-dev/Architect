@@ -16,19 +16,19 @@ class RosterModule extends React.Component {
   constructor() {
     super();
 
-    this.state = { members: [] }
+    this.state = { users: [] }
   }
 
   componentDidMount() {
-    API.get(`/members`)
+    API.get(`/user/all`)
       .then(res => {
-        const members = res.data;
-        this.setState({ members });
+        const users = res.data;
+        this.setState({ users });
       })
   };
 
   render() {
-    const teams = [...new Set(this.state.members.map(u => u.team))];
+    const teams = [...new Set(this.state.users.map(u => u.team))];
 
     return (
       <React.Fragment>
@@ -36,9 +36,9 @@ class RosterModule extends React.Component {
         {teams.map((team, index) => (
           <React.Fragment key={team + '1'}>
             <RosterDivider team={team} key={team} />
-            {this.state.members.map(member => {
-              return member.team === team ?
-                <UserExpandable name={member.name} email={member.email} team={member.team} key={team + index + member.name} />
+            {this.state.users.map(user => {
+              return user.team.name === team ?
+                <UserExpandable name={user.name} email={user.email} team={user.team.name} key={team + index + user.name} />
               :
                 ""
             })}

@@ -1,5 +1,5 @@
 from flask import request, jsonify, Blueprint, Response
-from rest.models import User, user_schema, users_schema, db, Team
+from api.rest.models import User, user_schema, users_schema, db, Team
 from flask_cors import cross_origin
 
 user = Blueprint('user', __name__)
