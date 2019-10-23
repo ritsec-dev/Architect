@@ -1,0 +1,8 @@
+# Stage 1 - Build artifacts
+FROM node:latest AS build-deps
+WORKDIR /usr/src/app
+COPY package.json yarn.lock ./
+RUN yarn
+COPY . ./
+CMD ["yarn", "start"]
+EXPOSE 3000
