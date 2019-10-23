@@ -26,19 +26,17 @@ class User(db.Model, Base):
     role = db.Column(db.String(120))
     email = db.Column(db.String(120))
     phone = db.Column(db.String(12))
-    team_name = db.Column(db.String(120))
 
     parent_id = db.Column(db.Integer, ForeignKey("team.uuid"))
     team = relationship("Team", back_populates="members")
 
-    def __init__(self, name, role, email, phone, team_name, team):
+    def __init__(self, name, role, email, phone, team):
         self.name = name
         self.role = role
         self.email = email
         self.phone = phone
         #self.parent_id = team.uuid
         self.team = team
-        self.team_name = team_name
         self.uuid = str(uuid.uuid4())
 
 

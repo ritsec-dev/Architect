@@ -16,10 +16,10 @@ def add_user():
     team = Team.query.filter_by(name=team_name).first()
     if name and role and email and phone and team_name:
         if (team == None):
-            team = Team(name)
+            team = Team(team_name)
             db.session.add(team)
             db.session.commit()
-        new_user = User(name, role, email, phone, team_name, team)
+        new_user = User(name, role, email, phone, team)
         db.session.add(new_user)
         db.session.commit()
         return jsonify(user_schema.dump(new_user))
@@ -33,11 +33,11 @@ def get_users():
     all_users = User.query.all()
     user_list = []
     for user in all_users:
-        team = user.team_name
+        team = Team.query.filter_by(uuid=user.parent_id).one()
         new_user = {
             "name": user.name,
             "role": user.role,
-            "team": team,
+            "team": team.name,
             "email": user.email,
             "uuid": user.uuid,
             "phone": user.phone
