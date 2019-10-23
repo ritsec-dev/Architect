@@ -25,6 +25,9 @@ const styles = theme => ({
   },
   inlineIcon: {
     padding: "0",
+  },
+  table: {
+    margin: "0"
   }
 })
 
@@ -78,7 +81,15 @@ class UserExpandable extends React.Component {
           
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>{this.props.email}</Typography>
+          <table border="0" width="100%" align="right" style={this.props.table}>
+            <tbody>
+              <tr>
+                <td><Typography>Email Address: {this.props.email}</Typography></td>
+                <td><Typography>Competition Role: {this.props.role}</Typography></td>
+                <td><Typography>Phone Number: {this.props.phone}</Typography></td>
+                </tr>
+            </tbody>
+          </table>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     )

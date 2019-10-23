@@ -8,7 +8,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';    
 import { withStyles } from '@material-ui/styles';
 import API from '../API';
-import SelectInput from '@material-ui/core/Select/SelectInput';
 
 
 const styles = theme => ({
@@ -57,6 +56,7 @@ class CreateMember extends React.Component
       this.onChange = this.onChange.bind(this);
       this.handleOpen = this.handleOpen.bind(this);
       this.handleClose = this.handleClose.bind(this);
+      this.onKeyPress.bind(this);
     }
 
     handleSubmit = event => {
@@ -68,6 +68,16 @@ class CreateMember extends React.Component
         this.setState({sending: false})
       });
     }
+
+    onKeyPress = event => {
+      console.log("Logged keypress:" + event.key);
+      if (event.key === "Enter") {
+        if(this.state.name !== "" && this.state.email !== "" && this.state.phone !== "" && this.state.role !== "" && this.state.team !== "") {
+          this.handleSubmit();
+        }
+      }
+    }
+
 
     render() {
          
