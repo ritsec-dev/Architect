@@ -17,7 +17,7 @@ def add_user():
     if name and role and email and phone and team_name:
         if team:
 
-            new_user = User(name, role, email, phone, team)
+            new_user = User(name, role, email, phone, team_name, team)
 
             db.session.add(new_user)
             db.session.commit()
