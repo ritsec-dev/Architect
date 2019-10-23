@@ -11,4 +11,4 @@ This application is designed to work out-of-the-box with docker compose.
 You can also test these things on a much faster docker-compose
 
 1. Run `docker-compose -f docker-compose-dev.yml build && docker-compose -f docker-compose-dev.yml up`
-2. You can access your instance much quicker at `http://0.0.0.0`, but in production this will have compiled React instead
+2. You can access your instance much quicker at `http://localhost:3000`, but in production this will have compiled React instead
