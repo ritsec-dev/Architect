@@ -19,7 +19,7 @@ def add_user():
             team = Team(name)
             db.session.add(team)
             db.session.commit()
-        new_user = User(name, role, email, phone, team_name, team)
+        new_user = User(name, role, email, phone, team)
         db.session.add(new_user)
         db.session.commit()
         return jsonify(user_schema.dump(new_user))
@@ -33,11 +33,11 @@ def get_users():
     all_users = User.query.all()
     user_list = []
     for user in all_users:
-        team = user.team.name
+        team = Team.query.filter_by(uuid=user.parent_id).one()
         new_user = {
             "name": user.name,
             "role": user.role,
-            "team": team,
+            "team": team.name,
             "email": user.email,
             "uuid": user.uuid,
             "phone": user.phone
@@ -46,10 +46,9 @@ def get_users():
     return jsonify(user_list)
 
 
-@user.route('/user/delete', methods=['DELETE'])
+@user.route('/user/<string:uuid>/delete', methods=['DELETE'])
 @cross_origin()
-def delete_user():
-    uuid = request.json.get('uuid', '')
+def delete_user(uuid):
     if uuid:
         user = User.query.filter_by(uuid=uuid).first()
         if user:
