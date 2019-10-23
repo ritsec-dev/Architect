@@ -15,16 +15,14 @@ def add_user():
     team_name = request.json.get('team', '')
     team = Team.query.filter_by(name=team_name).first()
     if name and role and email and phone and team_name:
-        if team:
-
-            new_user = User(name, role, email, phone, team_name, team)
-
-            db.session.add(new_user)
+        if (team == None):
+            team = Team(name)
+            db.session.add(team)
             db.session.commit()
-
-            return jsonify(user_schema.dump(new_user))
-
-        return Response("Team does not exist", 500)
+        new_user = User(name, role, email, phone, team_name, team)
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify(user_schema.dump(new_user))
 
     return Response("Invalid JSON", 500)
 
@@ -33,8 +31,19 @@ def add_user():
 @cross_origin()
 def get_users():
     all_users = User.query.all()
-    result = users_schema.dump(all_users)
-    return jsonify(result)
+    user_list = []
+    for user in all_users:
+        team = user.team.name
+        new_user = {
+            "name": user.name,
+            "role": user.role,
+            "team": team,
+            "email": user.email,
+            "uuid": user.uuid,
+            "phone": user.phone
+        }
+        user_list.append(new_user)
+    return jsonify(user_list)
 
 
 @user.route('/user/delete', methods=['DELETE'])

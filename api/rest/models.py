@@ -36,7 +36,7 @@ class User(db.Model, Base):
         self.role = role
         self.email = email
         self.phone = phone
-        self.parent_id = team.uuid
+        #self.parent_id = team.uuid
         self.team = team
         self.team_name = team_name
         self.uuid = str(uuid.uuid4())

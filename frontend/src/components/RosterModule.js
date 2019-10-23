@@ -33,17 +33,15 @@ class RosterModule extends React.Component {
 
     return (
       <React.Fragment>
-      <row>
             <CreateTeam/>
             <CreateMember/>
-      </row>
 
         {teams.map((team, index) => (
           <React.Fragment key={team + '1'}>
             <RosterDivider team={team} key={team} />
             {this.state.users.map(user => {
-              return user.team_name === team ?
-                <UserExpandable name={user.name} email={user.email} team={user.team_name} key={user.team_name + index + user.name} />
+              return user.team === team ?
+                <UserExpandable name={user.name} email={user.email} team={user.team} key={user.team + index + user.name} />
               :
                 ""
             })}

@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';    
 import { withStyles } from '@material-ui/styles';
 import API from '../API';
+import SelectInput from '@material-ui/core/Select/SelectInput';
 
 
 const styles = theme => ({
@@ -50,7 +51,8 @@ class CreateMember extends React.Component
         phone: '',
         role: '',
         team: '',
-        open: false
+        open: false,
+        sending: false
       }
       this.onChange = this.onChange.bind(this);
       this.handleOpen = this.handleOpen.bind(this);
@@ -59,8 +61,12 @@ class CreateMember extends React.Component
 
     handleSubmit = event => {
       const { name, email, phone, role, team } = this.state;
-      API.post('/user/add', {"name": name, "email": email, "phone": phone, "role": role , "team":team});
-      this.setState({open: false});
+      this.setState({sending: true})
+      API.post('/user/add', {"name": name, "email": email, "phone": phone, "role": role , "team":team}).then(data => {
+        this.setState({open: false});
+        window.location.reload();
+      }
+      );
     }
 
     render() {
