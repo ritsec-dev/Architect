@@ -46,10 +46,9 @@ def get_users():
     return jsonify(user_list)
 
 
-@user.route('/user/delete', methods=['DELETE'])
+@user.route('/user/<string:uuid>/delete', methods=['DELETE'])
 @cross_origin()
-def delete_user():
-    uuid = request.json.get('uuid', '')
+def delete_user(uuid):
     if uuid:
         user = User.query.filter_by(uuid=uuid).first()
         if user:
