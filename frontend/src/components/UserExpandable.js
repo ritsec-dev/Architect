@@ -2,6 +2,7 @@ import React from 'react';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -32,7 +33,7 @@ class UserExpandable extends React.Component {
   constructor() {
     super();
 
-    this.state = { hover: false, uuid: this.props.uuid };
+    this.state = { hover: false };
   }
 
   toggleHover = (e) => {
@@ -40,9 +41,10 @@ class UserExpandable extends React.Component {
   }
 
   sampleDelete = (e) => {
-    API.delete(`/users/delete`, {"uuid": this.state.uuid})
+    API.delete(`/user/${this.props.uuid}/delete`)
       .then(res => {
-        console.log(res)
+        console.log(res);
+        window.location.reload();
     })
   }
 
@@ -61,25 +63,24 @@ class UserExpandable extends React.Component {
           <Typography className={classes.heading}>
             {this.props.name}
           </Typography>
+
           <Typography className={classes.secondaryHeading}>
             {this.props.team}
           </Typography>
+
           <Typography className={classes.secondaryHeading}>
             {this.props.email}
           </Typography>
 
-          {this.state.hover ?
-            <IconButton aria-label="delete" className={classes.inlineIcon} onClick={this.sampleDelete}>
-              <DeleteIcon fontSize="small" />
-            </IconButton>
-          :
-            ""
-          }
-          
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>{this.props.email}</Typography>
         </ExpansionPanelDetails>
+        <ExpansionPanelActions>
+          <IconButton aria-label="delete" className={classes.inlineIcon} onClick={this.sampleDelete}>
+            <DeleteIcon fontSize="default" />
+          </IconButton>
+        </ExpansionPanelActions>
       </ExpansionPanel>
     )
   }

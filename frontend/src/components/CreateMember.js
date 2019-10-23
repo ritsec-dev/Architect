@@ -62,7 +62,7 @@ class CreateMember extends React.Component
     handleSubmit = event => {
       const { name, email, phone, role, team } = this.state;
       this.setState({sending: true})
-      API.post('/user/add', {"name": name, "email": email, "phone": phone, "role": role , "team":team}).then(data => {
+      API.post('/user/add', {"name": name, "email": email, "phone": phone, "role": role , "team": team}).then(data => {
         this.setState({open: false});
         window.location.reload(); 
         this.setState({sending: false})
