@@ -21,4 +21,4 @@ services:
       dockerfile: Dockerfile.dev
     container_name: frontend_dev
     ports:
-      - 3000:80
+      - 3000:3000
