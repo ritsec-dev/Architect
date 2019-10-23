@@ -64,9 +64,9 @@ class CreateMember extends React.Component
       this.setState({sending: true})
       API.post('/user/add', {"name": name, "email": email, "phone": phone, "role": role , "team":team}).then(data => {
         this.setState({open: false});
-        window.location.reload();
-      }
-      );
+        window.location.reload(); 
+        this.setState({sending: false})
+      });
     }
 
     render() {

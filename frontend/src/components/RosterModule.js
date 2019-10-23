@@ -32,7 +32,7 @@ class RosterModule extends React.Component {
 
     return (
       <React.Fragment>
-            <CreateMember/>
+      <CreateMember/>
 
         {teams.map((team, index) => (
           <React.Fragment key={team + '1'}>
