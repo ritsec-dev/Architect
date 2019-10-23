@@ -2,7 +2,6 @@ import React from 'react';
 import UserExpandable from './UserExpandable';
 import RosterDivider from './RosterDivider';
 import CreateMember from './CreateMember';
-import CreateTeam from './CreateTeam';
 import { withStyles } from '@material-ui/styles';
 
 import API from '../API';
