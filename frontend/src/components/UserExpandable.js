@@ -32,7 +32,7 @@ class UserExpandable extends React.Component {
   constructor() {
     super();
 
-    this.state = { hover: false };
+    this.state = { hover: false, uuid: this.props.uuid };
   }
 
   toggleHover = (e) => {
@@ -40,7 +40,7 @@ class UserExpandable extends React.Component {
   }
 
   sampleDelete = (e) => {
-    API.delete(`/members`)
+    API.delete(`/users/delete`, {"uuid": this.state.uuid})
       .then(res => {
         console.log(res)
     })
