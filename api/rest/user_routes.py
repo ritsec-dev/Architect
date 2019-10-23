@@ -33,7 +33,7 @@ def get_users():
     all_users = User.query.all()
     user_list = []
     for user in all_users:
-        team = user.team.name
+        team = user.team_name
         new_user = {
             "name": user.name,
             "role": user.role,
