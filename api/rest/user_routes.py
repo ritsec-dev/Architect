@@ -16,7 +16,7 @@ def add_user():
     team = Team.query.filter_by(name=team_name).first()
     if name and role and email and phone and team_name:
         if (team == None):
-            team = Team(name)
+            team = Team(team_name)
             db.session.add(team)
             db.session.commit()
         new_user = User(name, role, email, phone, team)

@@ -65,7 +65,7 @@ class UserExpandable extends React.Component {
           </Typography>
 
           <Typography className={classes.secondaryHeading}>
-            {this.props.team}
+            {this.props.role}
           </Typography>
 
           <Typography className={classes.secondaryHeading}>
