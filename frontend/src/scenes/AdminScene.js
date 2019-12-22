@@ -18,6 +18,7 @@ import Paper from '@material-ui/core/Paper';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import RosterModule from '../components/RosterModule'
+import MachinesModule from '../components/MachinesModule'
 
 const drawerWidth = 240;
 
@@ -52,6 +53,7 @@ const useStyles = makeStyles(theme => ({
 export default function ClippedDrawer() {
   const classes = useStyles();
   const RosterLink = React.forwardRef((props, ref) => <Link to="/app/roster" innerRef={ref} {...props} />);
+  const MachinesLink = React.forwardRef((props, ref) => <Link to="/app/machines" innerRef={ref} {...props} />);
 
   return (
     <div className={classes.root}>
@@ -83,7 +85,7 @@ export default function ClippedDrawer() {
                     <ListItemText primary="Roster" />
                 </ListItem>
                 <Divider />
-                <ListItem button key="Machines" disabled={true}>
+                <ListItem button key="Machines" className={(window.location.pathname === "/app/machines") ? classes.currentNavButton : ""} component={MachinesLink}>
                   <ListItemIcon><ComputerIcon /></ListItemIcon>
                   <ListItemText primary="Machines" />
                 </ListItem>
@@ -93,6 +95,7 @@ export default function ClippedDrawer() {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Paper className={classes.modularPaper}>
+
             <Route exact={true} path="/" render={() => (
               <div>
                 <Typography variant="h5" component="h3">
@@ -103,11 +106,19 @@ export default function ClippedDrawer() {
                 </Typography>
               </div>
             )}/>
+
             <Route exact={true} path="/app/roster" render={() => (
               <div>
                 <RosterModule />
               </div>
             )}/>
+
+            <Route exact={true} path="/app/machines" render={() => (
+              <div>
+                <MachinesModule />
+              </div>
+            )}/>
+
           </Paper>
         </main>
       </Router>

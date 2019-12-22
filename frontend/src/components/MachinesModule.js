@@ -1,7 +1,7 @@
 import React from 'react';
 import UserExpandable from './UserExpandable';
 import RosterDivider from './RosterDivider';
-import CreateMemberButton from './CreateMemberButton';
+import CreateMachineButton from './CreateMachineButton';
 import { withStyles } from '@material-ui/styles';
 
 import API from '../API';
@@ -12,7 +12,7 @@ const styles = theme => ({
   }
 })
 
-class RosterModule extends React.Component {
+class MachinesModule extends React.Component {
   constructor() {
     super();
 
@@ -32,7 +32,7 @@ class RosterModule extends React.Component {
 
     return (
       <React.Fragment>
-      <CreateMemberButton />
+      <CreateMachineButton />
 
         {teams.map((team, index) => (
           <React.Fragment key={team + '1'}>
@@ -51,4 +51,4 @@ class RosterModule extends React.Component {
   }
 }
 
-export default withStyles(styles)(RosterModule);
+export default withStyles(styles)(MachinesModule);
