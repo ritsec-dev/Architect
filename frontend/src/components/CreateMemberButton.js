@@ -11,16 +11,13 @@ import API from '../API';
 
 
 const styles = theme => ({
-  nothing: {
-    color: "black",
-  }, 
-  CreateMemberButton: {
+  createMemberButton: {
     display: 'flex',
     flex: 1,
     marginLeft: 'auto',
     position: 'relative',
     textAlign: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
 })
 
@@ -81,11 +78,11 @@ class CreateMemberButton extends React.Component
 
     render() {
          
-        //const { classes } = this.props;
+        const { classes } = this.props;
       
         return (
           <div>
-            <div style={this.state.CreateMemberButton}>
+            <div className={classes.createMemberButton}>
               <Button variant="outlined" color="primary" onClick={this.handleOpen}>
                 Add Member
               </Button>

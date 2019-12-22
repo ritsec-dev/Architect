@@ -7,8 +7,8 @@ import { withStyles } from '@material-ui/styles';
 import API from '../API';
 
 const styles = theme => ({
-  nothing: {
-    color: "black",
+  createMemberButton: {
+    aignItems: "flex-end",
   }
 })
 
@@ -29,6 +29,7 @@ class RosterModule extends React.Component {
 
   render() {
     const teams = [...new Set(this.state.users.map(u => u.team))];
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
