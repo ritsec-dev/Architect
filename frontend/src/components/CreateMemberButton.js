@@ -26,7 +26,7 @@ const styles = theme => ({
 
 
 
-class CreateMember extends React.Component
+class CreateMemberButton extends React.Component
 {
 
     handleOpen = () => {
@@ -159,4 +159,4 @@ class CreateMember extends React.Component
     }
   }
 
-export default withStyles(styles)(CreateMember)
+export default withStyles(styles)(CreateMemberButton)
