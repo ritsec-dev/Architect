@@ -1,14 +1,14 @@
 import React from 'react';
 import UserExpandable from './UserExpandable';
 import RosterDivider from './RosterDivider';
-import CreateMember from './CreateMember';
+import CreateMemberButton from './CreateMemberButton';
 import { withStyles } from '@material-ui/styles';
 
 import API from '../API';
 
 const styles = theme => ({
-  nothing: {
-    color: "black",
+  createMemberButton: {
+    aignItems: "flex-end",
   }
 })
 
@@ -29,10 +29,11 @@ class RosterModule extends React.Component {
 
   render() {
     const teams = [...new Set(this.state.users.map(u => u.team))];
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
-      <CreateMember />
+      <CreateMemberButton />
 
         {teams.map((team, index) => (
           <React.Fragment key={team + '1'}>
